@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import NavLinks from "./NavLinks";
 
 const NavBar = () => {
   const banglaDate = new Intl.DateTimeFormat("bn-BD-u-ca-beng", {
@@ -10,8 +11,9 @@ const NavBar = () => {
   //   console.log(banglaDate, "Here is Bangla Date");
 
   return (
-    <section className="container mx-auto grid grid-cols-3 py-5">
-      <div></div>
+    <section className="py-5">
+      <div className="container mx-auto grid grid-cols-3">
+        <div></div>
       <div className="flex gap-2 text-lg font-bold justify-center">
         <Image
           src={"/logo.webp"}
@@ -30,6 +32,8 @@ const NavBar = () => {
           সাইন আপ
         </button>
       </div>
+      </div>
+      <NavLinks />
     </section>
   );
 };
