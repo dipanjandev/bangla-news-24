@@ -12,7 +12,7 @@ const NavLinks = async () => {
   const res = await fetch("https://news-api-v2.vercel.app/api/categories");
   const data = await res.json();
   const navs: dataType[] = data.data;
-  const filteredData = navs.filter((n) => n.scrapable);
+  const filteredData = navs.filter((n) => n.topicId);
   //   এখানে তো আমরা চাইলে topicId দিয়েও করতে পারতাম। আর scrapable এর ক্ষেত্রে যেমন আমরা true false ব্যাবহার করছি তেমন টপিকআইডির ক্ষেত্রে আমরা কি ব্যবহার করতাম?
   //   console.log(navs, "Data from Data for nav links");
 
