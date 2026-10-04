@@ -32,7 +32,7 @@ const NewsSection = async () => {
   //   console.log(otherSection);
 
   return (
-    <div className="grid grid-cols-3 gap-2 container mx-auto">
+    <div className="grid grid-cols-3 gap-2">
       <div className="col-span-2">
         {/* News Section */}
         <MainNews news={mainNews} />

@@ -14,7 +14,7 @@ const Marquee = async () => {
   //   console.log(marqData, "Here is MarqData");
 
   return (
-    <section className="bg-red-600 text-white">
+    <section className="bg-red-600 text-white mb-10">
       <div className="container mx-auto flex items-center">
         <div className="bg-red-700 py-1 px-2 font-bold">সর্বশেষ</div>
         <MarqueeText direction="right" duration={20}>
