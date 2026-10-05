@@ -21,13 +21,13 @@ const signUpPage = () => {
     });
 
     if (data) {
-      toast.success("Successfully Create Account");
+      toast.success("আপনার একাউন্ট সফলভাবে তৈরি হয়েছে");
       redirect("/");
       //   console.log(data);
     }
     if (error) {
       //   console.log(error);
-      toast.error("User Already Exist");
+      toast.error("ইতোমধ্যে ইমেইটি দিয়ে রেজিস্ট্রেশন করা রয়েছে");
     }
   };
   return (

@@ -1,7 +1,48 @@
+"use client";
+import { signIn } from "@/lib/auth-client";
+
+import { redirect } from "next/navigation";
+import React from "react";
+import { toast } from "react-toastify";
+
 const signInPage = () => {
+  const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const user = Object.fromEntries(formData.entries()) as {
+      email: string;
+      password: string;
+    };
+    const { data, error } = await signIn.email({
+      ...user,
+    });
+    if (data) {
+      toast.success("সফলভাবে সাইন ইন হয়েছে");
+      redirect("/");
+      //   console.log(data);
+    }
+    if (error) {
+      //   console.log(error);
+      toast.error("ভূল ইমেইল এবং পাসওয়ার্ড");
+    }
+  };
+
+  const handleToGoogleSignIn = async () => {
+    await signIn.social({
+      provider: "google",
+    });
+    // console.log(data, "data from google");
+  };
+  const githubSignin = async () => {
+    await signIn.social({
+      provider: "github",
+    });
+    //   console.log(data);
+  };
+
   return (
     <div className="flex justify-center pt-5">
-      <form>
+      <form onSubmit={onSubmit}>
         <fieldset className="fieldset rounded-box w-xl space-y-4">
           <h3 className="text-4xl grid justify-center font-bold text-red-600 pb-5">
             সাইন ইন
@@ -27,8 +68,27 @@ const signInPage = () => {
             />
           </div>
 
-          <button className="btn bg-red-600 text-white font-bold mt-4">
+          <button
+            type="submit"
+            className="btn bg-red-600 text-white font-bold mt-4"
+          >
             সাইন ইন করুন
+          </button>
+          <div className="divider text-lg font-bold">অথবা</div>
+
+          {/* Sign in with google */}
+          <button
+            onClick={handleToGoogleSignIn}
+            className="btn bg-blue-600 text-white font-bold mt-4"
+          >
+            গুগল দিয়ে সাইন ইন করুন
+          </button>
+          {/* Sign in with Github */}
+          <button
+            onClick={githubSignin}
+            className="btn bg-gray-600 text-white font-bold mt-4"
+          >
+            গিটহাব দিয়ে সাইন ইন করুন
           </button>
         </fieldset>
       </form>

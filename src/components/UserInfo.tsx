@@ -1,17 +1,24 @@
 "use client";
 
-import { useSession } from "@/lib/auth-client";
-import { signOut } from "better-auth/api";
+import { authClient, useSession } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
+// import { useRouter } from "next/navigation";
 
 const UserInfo = () => {
   const { data: session } = useSession();
   //   console.log(session, "from Data");
+  //   const router = useRouter();
   const user = session?.user;
   //   console.log(user, "from User");
   const handleSignout = async () => {
-    await signOut();
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          window.location.reload(); // সাথে সাথে পেজ রিফ্রেশ করে লগইন স্টেট মুছে দেবে
+        },
+      },
+    });
   };
 
   return (
@@ -31,10 +38,7 @@ const UserInfo = () => {
             </div>
             <h4 className="text-sm font-normal">{user.name}</h4>
           </div>
-          <button
-            onClick={() => handleSignout()}
-            className="btn bg-red-600 text-white"
-          >
+          <button onClick={handleSignout} className="btn bg-red-600 text-white">
             সাইন আউট
           </button>
         </div>
