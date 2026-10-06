@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 // ১. টপিক/ক্যাটাগরি টাইপ
 export interface NewsTopic {
@@ -74,12 +75,16 @@ const NewsDetais = async ({ params }: PageProps) => {
   const data: NewsApiResponse = await res.json();
   const news: NewsItem = data.data;
 
+  if (!news) {
+    notFound();
+  }
+
   return (
     <article className="max-w-4xl mx-auto px-4 py-8 font-sans antialiased text-slate-800">
       {/* ১. টপিক/ক্যাটাগরি ব্যাজ */}
-      {news.topics && news.topics.length > 0 && (
+      {news?.topics && news?.topics.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 mb-4">
-          {news.topics.slice(0, 2).map((topic) => (
+          {news?.topics.slice(0, 2).map((topic) => (
             <span
               key={topic.id}
               className="text-xs font-bold text-red-700 uppercase tracking-wider bg-red-50 px-2.5 py-1 rounded-sm"
@@ -92,7 +97,7 @@ const NewsDetais = async ({ params }: PageProps) => {
 
       {/* ২. মূল হেডলাইন */}
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-4">
-        {news.title}
+        {news?.title}
       </h1>
 
       {/* ৩. মেটা ইনফরমেশন */}

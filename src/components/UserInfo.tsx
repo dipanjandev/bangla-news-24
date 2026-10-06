@@ -3,12 +3,9 @@
 import { authClient, useSession } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
 
 const UserInfo = () => {
   const { data: session } = useSession();
-  //   console.log(session, "from Data");
-  //   const router = useRouter();
   const user = session?.user;
   //   console.log(user, "from User");
   const handleSignout = async () => {
@@ -26,17 +23,19 @@ const UserInfo = () => {
       {user ? (
         <div className="flex items-center gap-5">
           <div className="flex flex-col items-center gap-2">
-            <div className="avatar">
-              <div className="ring-primary ring-offset-base-100 rounded-full ring-2 ring-offset-2">
-                <Image
-                  width={10}
-                  height={10}
-                  alt={user?.name}
-                  src={user?.image as string}
-                />
+            <Link href={"/profile"}>
+              <div className="avatar">
+                <div className="ring-red-600 ring-offset-base-100 rounded-full ring-2 ring-offset-2">
+                  <Image
+                    width={10}
+                    height={10}
+                    alt={user?.name}
+                    src={user?.image as string}
+                  />
+                </div>
               </div>
-            </div>
-            <h4 className="text-sm font-normal">{user.name}</h4>
+            </Link>
+            <h4 className="text-sm font-normal">{user?.name}</h4>
           </div>
           <button onClick={handleSignout} className="btn bg-red-600 text-white">
             সাইন আউট
