@@ -13,17 +13,13 @@ const signInPage = () => {
       email: string;
       password: string;
     };
-    const { data, error } = await signIn.email({
+    const { data } = await signIn.email({
       ...user,
     });
     if (data) {
       toast.success("সফলভাবে সাইন ইন হয়েছে");
       redirect("/");
       //   console.log(data);
-    }
-    if (error) {
-      //   console.log(error);
-      toast.error("ভূল ইমেইল এবং পাসওয়ার্ড");
     }
   };
 
